@@ -1,0 +1,42 @@
+{
+  "name": "any-stacker",
+  "version": "0.0.0",
+  "description": "",
+  "main": "server.js",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "install-server": "npm install",
+    "install-client": "cd client && npm install",
+    "install-prod": "npm ci && cd client && npm ci",
+    "prune-prod": "npm prune --omit=dev && cd client && npm prune --omit=dev",
+    "server": "nodemon server.js",
+    "client": "cd client && npm run dev",
+    "dev": "concurrently --kill-others-on-fail \" npm run server\" \" npm run client\"",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "build-client": "cd client && npm run build",
+    "deploy-local": "npm run build-client && npm start",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nocturnalmc/any-stacker.git"
+  },
+  "author": "",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/nocturnalmc/any-stacker/issues"
+  },
+  "homepage": "https://github.com/nocturnalmc/any-stacker#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "helmet": "^6.0.1"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.22"
+  }
+}
