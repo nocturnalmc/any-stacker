@@ -1,4 +1,8 @@
 # core
 /node_modules
 .env
-/data
+
+# local stuff only
+/data/jpn.json
+/data/sekolah.json
+/data/pelajar.json
