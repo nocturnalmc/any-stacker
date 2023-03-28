@@ -18,6 +18,8 @@ import moeis from './routes/moeis.js';
 // LET'S GO
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
+app.set('trust proxy', 1);
+app.disable('x-powered-by');
 
 // only when ready to deploy
 app.use(express.static(path.resolve(__dirname, './client/dist')));
@@ -33,15 +35,15 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, './client/dist', 'index.html'));
 });
 
+// not found
+app.use((req, res) => {
+  res.status(404).json({ msg: 'Error: 404, route does not exist' });
+});
+
 // error handler
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).json({ msg: 'Nope' });
-});
-
-// not found
-app.use((req, res) => {
-  res.status(404).json({ msg: 'Error: 404, route does not exist' });
 });
 
 // SERVER ------------------------------------------------------
