@@ -18,7 +18,7 @@ COPY . .
 RUN npm run install-prod
 
 # build client React JS
-# RUN npm run build-client
+RUN npm run build-client
 
 # prune image for production
 RUN npm run prune-prod

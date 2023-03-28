@@ -5,6 +5,10 @@ import 'express-async-errors';
 import express from 'express';
 import helmet from 'helmet';
 
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
 // MIDDLEWARE
 import moeisAuth from './middlewares/moeisAuth.js';
 
@@ -13,12 +17,21 @@ import moeis from './routes/moeis.js';
 
 // LET'S GO
 const app = express();
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+// only when ready to deploy
+app.use(express.static(path.resolve(__dirname, './client/dist')));
 
 app.use(express.json({ limit: '50mb' }));
 app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 
 // mimicking MOEIS integration
 app.use('/api/v1/moeis', moeisAuth, moeis);
+
+// only when ready to deploy
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/dist', 'index.html'));
+});
 
 // error handler
 app.use((err, req, res, next) => {
