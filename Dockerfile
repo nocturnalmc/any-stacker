@@ -4,6 +4,7 @@ FROM node:lts-alpine
 # update the package index
 RUN apk update
 RUN apk add --no-cache tzdata
+RUN apk add --no-cache nano
 
 # set timezone data
 ENV TZ=Asia/Kuala_Lumpur

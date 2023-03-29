@@ -5,4 +5,6 @@
 # local stuff only
 /data/jpn.json
 /data/sekolah.json
+/data/singleSekolah.json
 /data/pelajar.json
+/data/singlePelajar.json
