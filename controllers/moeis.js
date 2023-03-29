@@ -30,7 +30,7 @@ const getSekolahMOEIS = async (req, res) => {
       );
       return res.status(200).json(data);
     } catch (error) {
-      return res.json({ msg: error });
+      return res.json({ msg: error.message });
     }
   } else {
     console.log('query local data sekolah');
@@ -71,7 +71,7 @@ const getPelajarMOEIS = async (req, res) => {
       );
       return res.status(200).json(data);
     } catch (error) {
-      return res.json({ msg: error });
+      return res.json({ msg: error.message });
     }
   } else {
     console.log('query local data pelajar');
