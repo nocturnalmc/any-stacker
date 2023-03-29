@@ -1,5 +1,5 @@
-import axios from 'axios';
 import https from 'https';
+import axios from 'axios';
 import sekolahMOEIS from '../data/sekolah.json' assert { type: 'json' };
 import pelajarMOEIS from '../data/pelajar.json' assert { type: 'json' };
 
