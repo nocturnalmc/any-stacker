@@ -42,7 +42,9 @@ const getSekolahMOEIS = async (req, res) => {
       return res.status(404).json({ msg: 'No sekolah found' });
     }
 
-    res.status(200).json(sekolahByNegeri);
+    const trueSekolahByNegeri = sekolahByNegeri[0];
+
+    res.status(200).json(trueSekolahByNegeri);
   }
 };
 
@@ -83,7 +85,9 @@ const getPelajarMOEIS = async (req, res) => {
       return res.status(404).json({ msg: 'No pelajar found' });
     }
 
-    res.status(200).json(pelajarByKelas);
+    const truePelajarByKelas = pelajarByKelas[0];
+
+    res.status(200).json(truePelajarByKelas);
   }
 };
 
