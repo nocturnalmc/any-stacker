@@ -36,25 +36,20 @@ const getSekolahMOEIS = async (req, res) => {
 
   if (process.env.MOEIS_APIKEY) {
     console.log('query MOEIS sekolah');
+    const URLquery =
+      process.env.MOEIS_INTEGRATION_URL_SEKOLAH +
+      `?jkod=${jkod}` +
+      `${jnskod ? `&jnskod=${jnskod}` : ''}`;
     try {
       const agent = new https.Agent({
         rejectUnauthorized: false,
       });
-      const { data } = await axios.get(
-        process.env.MOEIS_INTEGRATION_URL_SEKOLAH +
-          `?jkod=${jkod}
-          ${katkod ? `&katkod=${katkod}` : ''}${pkod ? `&pkod=${pkod}` : ''}${
-            opskod ? `&opskod=${opskod}` : ''
-          }${stpm ? `&stpm=${stpm}` : ''}${jnskod ? `&jnskod=${jnskod}` : ''}${
-            special ? `&special=${special}` : ''
-          }`,
-        {
-          httpsAgent: agent,
-          headers: {
-            APIKEY: process.env.MOEIS_APIKEY,
-          },
-        }
-      );
+      const { data } = await axios.get(URLquery, {
+        httpsAgent: agent,
+        headers: {
+          APIKEY: process.env.MOEIS_APIKEY,
+        },
+      });
       return res.status(200).json(data);
     } catch (error) {
       return res.status(503).json({ msg: error.message });
