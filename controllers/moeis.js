@@ -39,7 +39,8 @@ const getSekolahMOEIS = async (req, res) => {
     const URLquery =
       process.env.MOEIS_INTEGRATION_URL_SEKOLAH +
       `?jkod=${jkod}` +
-      `${jnskod ? `&jnskod=${jnskod}` : ''}`;
+      `${jnskod ? `&jnskod=${jnskod}` : ''}` +
+      `${stpm ? `&stpm=${stpm}` : ''}`;
     try {
       const agent = new https.Agent({
         rejectUnauthorized: false,
