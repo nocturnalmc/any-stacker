@@ -118,23 +118,25 @@ const getPelajarMOEIS = async (req, res) => {
 
   if (process.env.MOEIS_APIKEY) {
     console.log('query MOEIS pelajar');
+    let URLquery = '';
+    if (inid) {
+      // query by inid
+      URLquery = process.env.MOEIS_INTEGRATION_URL_PELAJAR + `?inid=${inid}`;
+    }
+    if (pkid) {
+      // query by pkid
+      URLquery = process.env.MOEIS_INTEGRATION_URL_PELAJAR + `?pkid=${pkid}`;
+    }
     try {
       const agent = new https.Agent({
         rejectUnauthorized: false,
       });
-      const { data } = await axios.get(
-        process.env.MOEIS_INTEGRATION_URL_PELAJAR +
-          `?inid=${inid}
-        ${pkid ? `&pkid=${pkid}` : ''}${
-            statusoku ? `&statusoku=${statusoku}` : ''
-          }`,
-        {
-          httpsAgent: agent,
-          headers: {
-            APIKEY: process.env.MOEIS_APIKEY,
-          },
-        }
-      );
+      const { data } = await axios.get(URLquery, {
+        httpsAgent: agent,
+        headers: {
+          APIKEY: process.env.MOEIS_APIKEY,
+        },
+      });
       return res.status(200).json(data);
     } catch (error) {
       return res.status(503).json({ msg: error.message });
